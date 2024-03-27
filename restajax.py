@@ -18,9 +18,11 @@ def test_post():
     if request.method == "POST":
         nombre = request.json.get('nombre')  # Assuming JSON data
         email = request.json.get('email')
-        global texto  # Not necessary here
+        response = {'nombre': nombre, 'email': email }
+        print("Received POST request with Nombre:", nombre, "and Email:", email)  # Print received data
         if nombre is not None:
             texto = "Hola " + nombre
+            return response
             return jsonify({"message": "ok"})
         else:
             return jsonify({"message": "error", "reason": "nombre is missing"}), 400
